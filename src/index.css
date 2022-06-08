@@ -1,0 +1,67 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+html, body {
+    height: 100%;
+}
+
+
+/*
+ To make HTML and body fit the screen
+*/
+#root {
+    min-height: 100%;
+}
+
+/* fallback for IE 6 */
+* html #root {
+    height: 100%;
+}
+
+
+/*
+ To make HTML and body fit the screen
+*/
+body, p {
+    margin: 0;
+    padding: 0
+}
+
+#root {
+    /*Basic settings and fonts*/
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /*To make #Container centre positioned*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /*Fallback for background image*/
+    background: rgb(50, 70, 103);
+    background: linear-gradient(89deg, rgba(50, 70, 103, 1) 0%, rgba(152, 177, 163, 1) 100%);
+    /*Background image*/
+    background-image: url("/../assets/background.gif");
+    /*To make background image cover the screen*/
+    background-size: cover;
+    background-position: center;
+    /* To display background image correctly under glass effect of #container*/
+    background-attachment: fixed;
+    /*Set default font color*/
+    color: white;
+    /*
+    To prevent overflow and scrollbar appearance
+    */
+    overflow: hidden;
+}
