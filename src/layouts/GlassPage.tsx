@@ -1,5 +1,5 @@
 import {useTitle} from "../hooks/useTitle";
-import React, {FC, PropsWithChildren} from "react";
+import React, {FC, PropsWithChildren, ReactNode} from "react";
 import styled from "styled-components";
 import {Config} from "../config";
 
@@ -11,7 +11,7 @@ export interface PageProps {
         content: string,
         side: TitleSide
     } | string,
-    minHeight?: string
+    footer?: ReactNode
 }
 
 export const GlassPage: FC<PropsWithChildren<PageProps>> = (
@@ -19,7 +19,7 @@ export const GlassPage: FC<PropsWithChildren<PageProps>> = (
         header,
         title,
         children,
-        minHeight
+        footer
     }) => {
     useTitle(`${Config.appName} - ${title}`)
 
@@ -28,9 +28,14 @@ export const GlassPage: FC<PropsWithChildren<PageProps>> = (
             <Title
                 side={typeof header !== "string" ? header.side : "start"}>
                 {typeof header === "string" ? header : header.content}</Title>
-            <Glass minHeight={minHeight}>
+            <Glass minHeight={"200px"}>
                 {children}
             </Glass>
+            {
+                footer && <Footer>
+                    {footer}
+                </Footer>
+            }
         </InnerContainer>
     </Container>
 }
@@ -52,7 +57,7 @@ const Title = styled.div<{ side: TitleSide }>`
   font-size: 32px;
   width: 100%;
   text-align: ${props => props.side};
-  margin:20px;
+  margin: 20px;
 `
 
 
@@ -62,9 +67,12 @@ export const Glass = styled.div<{ minHeight?: string }>`
   /*Positioning and  overflow*/
   position: relative;
   color: white;
-  height: clamp(${props => props.minHeight}, unset, calc(100vh - 150px));
+  min-height: ${props => props.minHeight};
   backdrop-filter: blur(10px);
   overflow: hidden;
   padding: 10px;
-  margin-bottom: 20px;
+`
+const Footer = styled.div`
+  width: 100%;
+  margin-bottom: 30px;
 `

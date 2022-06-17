@@ -2,19 +2,20 @@ import {Credits} from "./components/Credits";
 import React, {useState} from "react";
 import {Starships} from "./pages/Starships";
 import {MovieList} from "./pages/MovieList";
-import styled, {css} from "styled-components";
+import styled from "styled-components";
+import {MovieOT} from "./services/swapi";
 
 
 export const App = () => {
-    const [movieID, setMovieID] = useState<number | undefined>(undefined)
+    const [selectedMovie, setSelectedMovie] = useState<MovieOT | undefined>(undefined)
 
     return <Container>
-        {movieID ? <Starships/> : <MovieList/>}
+        {selectedMovie ? <Starships movie={selectedMovie} onSelectMovie={(item)=>setSelectedMovie(item)}/> : <MovieList onSelectMovie={(selected) => setSelectedMovie(selected)}/>}
         <Credits/>
     </Container>
 }
 
 const Container = styled.div`
-    width: 100%;
+  width: 100%;
 `
 

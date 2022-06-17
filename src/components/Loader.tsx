@@ -1,12 +1,20 @@
-import React, {FC} from "react";
+import {useDebouncedState} from "functional-hooks";
+import React, {FC, useEffect} from "react";
 import styled, {css, keyframes} from "styled-components";
 
 interface PropTypes {
     display?: boolean
+    delay?: number
 }
 
-export const Loader: FC<PropTypes> = ({display}) => {
-    return (display) ? <Container>
+export const Loader: FC<PropTypes> = ({display, delay}) => {
+    const [displayDebounced, setDisplay] = useDebouncedState<boolean>(true, delay || 500)
+
+    useEffect(() => {
+        display !== undefined && setDisplay(display)
+    }, [display])
+
+    return (displayDebounced) ? <Container>
         <Inner/>
     </Container> : <></>
 }
@@ -24,13 +32,10 @@ const Balls = keyframes`
 `
 
 const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
   position: absolute;
-  justify-content: center;
-  align-items: center;
-  pointer-events: none;
+  top: calc(50% - 90px);
+  width: 100%;
+  z-index: 10;
 `
 
 const Ball = css`

@@ -3,7 +3,8 @@ export const swapi = {
     url: (endpoint?: string) => `${swapi.baseURL}${endpoint}`,
     endpoints: {
         getMovies: `/films`,
-        getStarshipsByMovieID: (ID: number) => `/starships/${ID}`
+        getStarshipsByID: (ID: number) => `/starships/${ID}`,
+        getMoviesByID: (ID: number) => `/films/${ID}`
     },
 } as const
 
@@ -21,7 +22,8 @@ export interface StarshipOT {
     manufacturer: string,
     crew: string,
     passengers: string,
-    films: string[]
+    films: string[],
+    url:string
 }
 
 

@@ -2,6 +2,7 @@ import React, {FC} from "react";
 import styled from "styled-components";
 import {MovieOT} from "../../services/swapi";
 import {DefaultButton} from "../DefaultButton";
+import {Attribute} from "../Attribute";
 
 interface PropTypes {
     data: MovieOT,
@@ -23,11 +24,8 @@ export const MovieItem: FC<PropTypes> = (
 
     return <Container>
         {
-            Object.entries(attributes).map(([key, value]) =>
-                <Attribute>
-                    <Key>{key}</Key>
-                    <Value>{value}</Value>
-                </Attribute>)
+            Object.entries(attributes).map(([key, value], index) => <Attribute key={index} title={key}
+                                                                               value={String(value)}/>)
         }
         <DefaultButton onClick={() => onSelect(data.episode_id)}>
             Show Starships
@@ -55,30 +53,3 @@ const Container = styled.div`
   }
 `
 
-const Attribute = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  align-items: center;
-  width: 100%;
-
-  @media screen and (max-width: 620px) {
-    flex-wrap: wrap;
-    margin: 10px 0;
-  }
-`
-
-
-const Key = styled.span`
-  font-weight: bold;
-  font-size: 20px;
-  text-transform: capitalize;
-  margin-right: 10px;
-`
-
-const Value = styled.span`
-  color: indianred;
-  font-size: 16px;
-  font-style: italic;
-  text-transform: none;
-`
