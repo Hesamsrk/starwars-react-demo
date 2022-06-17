@@ -1,9 +1,14 @@
+import React, {FC} from "react";
 import styled, {css, keyframes} from "styled-components";
 
-export const Loader = () => {
-    return <Container>
+interface PropTypes {
+    display?: boolean
+}
+
+export const Loader: FC<PropTypes> = ({display}) => {
+    return (display) ? <Container>
         <Inner/>
-    </Container>
+    </Container> : <></>
 }
 
 const Balls = keyframes`

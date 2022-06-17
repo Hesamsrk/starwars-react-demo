@@ -1,14 +1,20 @@
-import {BrowserRouter} from "react-router-dom"
-import {Router} from "./routes/Router";
 import {Credits} from "./components/Credits";
-import {Loader} from "./components/Loader";
+import React, {useState} from "react";
+import {Starships} from "./pages/Starships";
+import {MovieList} from "./pages/MovieList";
+import styled, {css} from "styled-components";
+
 
 export const App = () => {
-    return <>
-        <BrowserRouter>
-            <Router/>
-        </BrowserRouter>
+    const [movieID, setMovieID] = useState<number | undefined>(undefined)
+
+    return <Container>
+        {movieID ? <Starships/> : <MovieList/>}
         <Credits/>
-        <Loader/>
-    </>
+    </Container>
 }
+
+const Container = styled.div`
+    width: 100%;
+`
+
